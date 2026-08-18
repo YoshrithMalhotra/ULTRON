@@ -1,7 +1,9 @@
 package llm
 
 import (
+	"bytes"
 	"encoding/json"
+	"net/http"
 )
 
 type Client struct {
@@ -23,4 +25,16 @@ func (c *Client) MarshalRequest(request ChatRequest) ([]byte, error) {
 	}
 
 	return response, nil
+}
+
+func (c *Client) DoRequest(data []byte) (*http.Request, error) {
+	req, err := http.NewRequest(
+		http.MethodPost,
+		c.BaseURL,
+		bytes.NewBuffer(data),
+	)
+	if err != nil {
+		return nil, err
+	}
+	return req, nil
 }
