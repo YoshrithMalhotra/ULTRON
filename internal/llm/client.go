@@ -36,5 +36,9 @@ func (c *Client) DoRequest(data []byte) (*http.Request, error) {
 	if err != nil {
 		return nil, err
 	}
+
+	req.Header.Set("Content-Type", "application/json")
+	req.Header.Set("Authorization", "Bearer "+c.APIKey)
+
 	return req, nil
 }
