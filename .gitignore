@@ -1,0 +1,33 @@
+# Binaries and build output
+/bin/
+*.exe
+*.exe~
+*.dll
+*.so
+*.dylib
+*.test
+*.out
+
+# Coverage and profiling
+coverage.out
+coverage.html
+*.prof
+
+# Dependency and tool caches
+/vendor/
+
+# IDE and editor files
+.idea/
+.vscode/
+*.swp
+*.swo
+
+# OS metadata
+.DS_Store
+._*
+Thumbs.db
+
+# Local environment and secrets
+.env
+.env.*
+!.env.example
