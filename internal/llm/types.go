@@ -10,3 +10,15 @@ type ChatRequest struct {
 	Messages []Message `json:"messages"`
 }
 
+type ChatResponse struct {
+	Choices []Choice `json:"choices"`
+}
+
+type Choice struct {
+	Message ResponseMessage `json:"message"`
+}
+
+type ResponseMessage struct {
+	Role    string `json:"role"`
+	Content string `json:"content"`
+}

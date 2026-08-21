@@ -3,6 +3,7 @@ package llm
 import (
 	"bytes"
 	"encoding/json"
+	"io"
 	"net/http"
 )
 
@@ -53,7 +54,7 @@ func (c *Client) SendRequest(req *http.Request) (*http.Response, error) {
 	return resp, nil
 }
 
-func (c *Client) ReadResponse(resp *http.Response) ([]byte, error){
+func (c *Client) ReadResponse(resp *http.Response) ([]byte, error) {
 	defer resp.Body.Close()
 	body, err := io.ReadAll(resp.Body)
 	if err != nil {
@@ -61,4 +62,13 @@ func (c *Client) ReadResponse(resp *http.Response) ([]byte, error){
 	}
 
 	return body, nil
+}
+
+func (c *Client) ParseResponse(body []byte) (*ChatResponse, error) {
+	var response ChatResponse
+	err := json.Unmarshal(body, &response)
+	if err != nil {
+		return nil, err
+	}
+	return &response, nil
 }
