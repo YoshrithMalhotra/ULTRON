@@ -42,3 +42,23 @@ func (c *Client) DoRequest(data []byte) (*http.Request, error) {
 
 	return req, nil
 }
+
+func (c *Client) SendRequest(req *http.Request) (*http.Response, error) {
+	httpClient := &http.Client{}
+	resp, err := httpClient.Do(req)
+	if err != nil {
+		return nil, err
+	}
+
+	return resp, nil
+}
+
+func (c *Client) ReadResponse(resp *http.Response) ([]byte, error){
+	defer resp.Body.Close()
+	body, err := io.ReadAll(resp.Body)
+	if err != nil {
+		return nil, err
+	}
+
+	return body, nil
+}
