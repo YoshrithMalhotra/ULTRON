@@ -3,9 +3,9 @@ package llm
 import (
 	"bytes"
 	"encoding/json"
+	"errors"
 	"io"
 	"net/http"
-	"errors"
 )
 
 type Client struct {
@@ -80,4 +80,37 @@ func (c *Client) ExtractContent(response *ChatResponse) (string, error) {
 	}
 
 	return response.Choices[0].Message.Content, nil
+}
+
+func (c *Client) Chat(request ChatRequest) (string, error) {
+	data, err := c.MarshalRequest(request)
+	if err != nil {
+		return "", err
+	}
+
+	req, err := c.DoRequest(data)
+	if err != nil {
+		return "", err
+	}
+
+	resp, err := c.SendRequest(req)
+	if err != nil {
+		return "", err
+	}
+
+	body, err := c.ReadResponse(resp)
+	if err != nil {
+		return "", err
+	}
+
+	response, err := c.ParseResponse(body)
+	if err != nil {
+		return "", err
+	}
+
+	content, err := c.ExtractContent(response)
+	if err != nil {
+		return "", err
+	}
+	return content, nil
 }
