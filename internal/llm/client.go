@@ -5,6 +5,7 @@ import (
 	"encoding/json"
 	"io"
 	"net/http"
+	"errors"
 )
 
 type Client struct {
@@ -71,4 +72,12 @@ func (c *Client) ParseResponse(body []byte) (*ChatResponse, error) {
 		return nil, err
 	}
 	return &response, nil
+}
+
+func (c *Client) ExtractContent(response *ChatResponse) (string, error) {
+	if len(response.Choices) == 0 {
+		return "", errors.New("no choices in response")
+	}
+
+	return response.Choices[0].Message.Content, nil
 }
