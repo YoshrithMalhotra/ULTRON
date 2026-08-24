@@ -4,6 +4,7 @@ import (
 	"bytes"
 	"encoding/json"
 	"errors"
+	"fmt"
 	"io"
 	"net/http"
 )
@@ -42,6 +43,9 @@ func (c *Client) DoRequest(data []byte) (*http.Request, error) {
 	req.Header.Set("Content-Type", "application/json")
 	req.Header.Set("Authorization", "Bearer "+c.APIKey)
 
+	fmt.Println("API key loaded:", len(c.APIKey), "characters")
+	fmt.Println("Base URL:", c.BaseURL)
+
 	return req, nil
 }
 
@@ -66,11 +70,16 @@ func (c *Client) ReadResponse(resp *http.Response) ([]byte, error) {
 }
 
 func (c *Client) ParseResponse(body []byte) (*ChatResponse, error) {
+	fmt.Println("RAW GROQ RESPONSE:")
+	fmt.Println(string(body))
+
 	var response ChatResponse
+
 	err := json.Unmarshal(body, &response)
 	if err != nil {
 		return nil, err
 	}
+
 	return &response, nil
 }
 
