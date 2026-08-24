@@ -8,7 +8,7 @@ type Assistant struct {
 
 func (a *Assistant) Respond(message string) (string, error) {
 	request := llm.ChatRequest{
-		Model: "openai/gpt-oss-20b",
+		Model: "openai/gpt-oss-20b",  
 		Messages: []llm.Message{
 			{
 				Role:    "user",
