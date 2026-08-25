@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Ultron</title>
+
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+<div class="app">
+
+    <!-- Sidebar -->
+    <aside class="sidebar">
+
+        <div class="brand">
+            <div class="brand-mark">U</div>
+            <span>ULTRON</span>
+        </div>
+
+        <button id="new-chat" class="new-chat">
+            <span>+</span>
+            New chat
+        </button>
+
+        <div class="sidebar-section">
+            <span class="section-label">RECENT</span>
+
+            <div id="conversation-list" class="conversation-list">
+                <button class="conversation active">
+                    <span class="conversation-icon">◈</span>
+                    <span>New conversation</span>
+                </button>
+            </div>
+        </div>
+
+        <div class="sidebar-bottom">
+            <div class="connection">
+                <span class="status-dot"></span>
+                <div>
+                    <span class="connection-title">System online</span>
+                    <span class="connection-subtitle">Ultron API</span>
+                </div>
+            </div>
+        </div>
+
+    </aside>
+
+
+    <!-- Main -->
+    <main class="main">
+
+        <!-- Header -->
+        <header class="topbar">
+
+            <div class="mobile-brand">
+                <div class="brand-mark">U</div>
+                <span>ULTRON</span>
+            </div>
+
+            <div class="model-info">
+                <span class="model-name">Ultron</span>
+                <span class="model-status">
+                    <span class="status-dot"></span>
+                    Online
+                </span>
+            </div>
+
+            <button id="clear-chat" class="icon-button" title="Clear conversation">
+                ⌘
+            </button>
+
+        </header>
+
+
+        <!-- Chat -->
+        <section id="chat" class="chat">
+
+            <!-- Empty state -->
+            <div id="empty-state" class="empty-state">
+
+                <div class="orb">
+                    <div class="orb-inner">U</div>
+                </div>
+
+                <h1>How can I help?</h1>
+
+                <p>
+                    Ask Ultron anything. Your conversation starts here.
+                </p>
+
+                <div class="suggestions">
+
+                    <button class="suggestion">
+                        <span>⌁</span>
+                        Explain something to me
+                    </button>
+
+                    <button class="suggestion">
+                        <span>⌘</span>
+                        Help me write code
+                    </button>
+
+                    <button class="suggestion">
+                        <span>◫</span>
+                        Brainstorm an idea
+                    </button>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- Composer -->
+        <div class="composer-container">
+
+            <form id="chat-form" class="composer">
+
+                <textarea
+                    id="message-input"
+                    placeholder="Message Ultron..."
+                    rows="1"
+                    autocomplete="off"
+                ></textarea>
+
+                <button
+                    id="send-button"
+                    type="submit"
+                    aria-label="Send message"
+                >
+                    ↑
+                </button>
+
+            </form>
+
+            <div class="composer-footer">
+                <span>Ultron can make mistakes. Verify important information.</span>
+                <span>Enter to send · Shift + Enter for newline</span>
+            </div>
+
+        </div>
+
+    </main>
+
+</div>
+
+<script src="app.js"></script>
+
+</body>
+</html>
