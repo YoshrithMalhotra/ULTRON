@@ -32,6 +32,11 @@ func main() {
 
 	router.POST("/chat", assistant.ChatHandler(ultron))
 
-	router.Run(":8080")
-}
+	port := os.Getenv("PORT")
 
+	if port == "" {
+		port = "8080"
+	}
+
+	router.Run(":" + port)
+}
