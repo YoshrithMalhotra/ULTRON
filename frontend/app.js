@@ -1,4 +1,4 @@
-const API_URL = "https://YOUR-ULTRON-URL.onrender.com";
+const API_URL = "https://ultron-lb3w.onrender.com";
 
 const chat = document.getElementById("chat");
 const form = document.getElementById("chat-form");
