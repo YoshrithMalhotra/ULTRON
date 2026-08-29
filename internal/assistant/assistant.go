@@ -6,15 +6,10 @@ type Assistant struct {
 	LLM *llm.Client
 }
 
-func (a *Assistant) Respond(message string) (string, error) {
+func (a *Assistant) Respond(messages []llm.Message) (string, error) {
 	request := llm.ChatRequest{
-		Model: "openai/gpt-oss-20b",  
-		Messages: []llm.Message{
-			{
-				Role:    "user",
-				Content: message,
-			},
-		},
+		Model:    "openai/gpt-oss-20b",
+		Messages: messages,
 	}
 
 	return a.LLM.Chat(request)

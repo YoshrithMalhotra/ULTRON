@@ -43,7 +43,10 @@ form.addEventListener("submit", async (event) => {
             },
 
             body: JSON.stringify({
-                message: message
+                messages: messages.map((m) => ({
+                    role: m.role,
+                    content: m.text
+                }))
             })
         });
 

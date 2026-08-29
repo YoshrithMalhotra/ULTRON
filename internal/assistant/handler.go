@@ -4,10 +4,12 @@ import (
 	"net/http"
 
 	"github.com/gin-gonic/gin"
+
+	"ultron/internal/llm"
 )
 
 type ChatRequest struct {
-	Message string `json:"message"`
+	Messages []llm.Message `json:"messages"`
 }
 
 func ChatHandler(a *Assistant) gin.HandlerFunc {
@@ -21,7 +23,14 @@ func ChatHandler(a *Assistant) gin.HandlerFunc {
 			return
 		}
 
-		response, err := a.Respond(req.Message)
+		if len(req.Messages) == 0 {
+			c.JSON(http.StatusBadRequest, gin.H{
+				"error": "messages is required",
+			})
+			return
+		}
+
+		response, err := a.Respond(req.Messages)
 		if err != nil {
 			c.JSON(http.StatusInternalServerError, gin.H{
 				"error": err.Error(),
