@@ -3,11 +3,14 @@ package main
 import (
 	"net/http"
 	"os"
+	"time"
 
 	"github.com/gin-gonic/gin"
+	"golang.org/x/time/rate"
 
 	"ultron/internal/assistant"
 	"ultron/internal/llm"
+	"ultron/internal/ratelimit"
 )
 
 func main() {
@@ -37,13 +40,15 @@ func main() {
 		LLM: llmClient,
 	}
 
+	chatLimiter := ratelimit.New(rate.Every(6*time.Second), 5)
+
 	router.GET("/health", func(c *gin.Context) {
 		c.JSON(http.StatusOK, gin.H{
 			"status": "ok",
 		})
 	})
 
-	router.POST("/chat", assistant.ChatHandler(ultron))
+	router.POST("/chat", chatLimiter.Middleware(), assistant.ChatHandler(ultron))
 
 	port := os.Getenv("PORT")
 
